@@ -1,0 +1,1 @@
+module github.com/cpj555/go-coinmarketcap
