@@ -38,7 +38,7 @@ apiKey := "your-api-key"
 //
 //     client.WithTimeout(time.Second*3)
 //
-client, err := NewInstance(client.WithApiKey(apiKey), client.WithTimeout(time.Second*3))
+client, err := NewClient(client.WithApiKey(apiKey), client.WithTimeout(time.Second*3))
 
 // 获取map列表，可以使用下面的方法
 list, err := client.GetMap(context.Background(),&types.GetMapReq{Start: 1, Limit: 10})
