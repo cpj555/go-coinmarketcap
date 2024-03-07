@@ -6,11 +6,13 @@
 
 <div align="center">
 
+
 # go-coinmarketcap
   <a href="https://github.com/dodo-open/dodo-open-go/blob/main/LICENSE">
-    <img src="https://img.shields.io/github/license/dodo-open/dodo-open-go" alt="license">
+    <img src="https://img.shields.io/github/license/cpj555/go-coinmarketcap" alt="license">
   </a>
 
+</div>
 
 
 
