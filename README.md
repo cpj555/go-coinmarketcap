@@ -38,7 +38,9 @@ apiKey := "your-api-key"
 //
 //     client.WithTimeout(time.Second*3)
 //
-client, err := NewClient(client.WithApiKey(apiKey), client.WithTimeout(time.Second*3))
+client, err := NewClient(client.WithApiKey(apiKey), client.WithTimeout(time.Second*3),
+client.WithProxyUrl("http://localhost:1080") //本地调试得开代理设置下代理请求,生产环境部署到香港或者国外服务器
+	)
 
 // 获取map列表，可以使用下面的方法
 list, err := client.GetMap(context.Background(),&types.GetMapReq{Start: 1, Limit: 10})
