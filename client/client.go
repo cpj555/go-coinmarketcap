@@ -12,6 +12,7 @@ type (
 	Client interface {
 		Base
 		CryptocurrencyV1API
+		CryptocurrencyV2API
 	}
 
 	// Base client basic interface
@@ -21,6 +22,10 @@ type (
 
 	CryptocurrencyV1API interface {
 		GetMap(ctx context.Context, req *types.GetMapReq) (*types.GetMapResp, error)
+	}
+
+	CryptocurrencyV2API interface {
+		GetInfo(ctx context.Context, req *types.GetInfoReq) (*types.GetInfoResp, error)
 	}
 )
 type (
@@ -36,6 +41,7 @@ type (
 		IsDebug   bool   // debug mode
 		IsSandBox bool
 		Timeout   time.Duration // resty client request timeout
+		ProxyUrl  string        //国内访问不了设置下代理
 	}
 )
 

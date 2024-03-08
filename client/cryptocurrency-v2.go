@@ -10,8 +10,8 @@ import (
 	_ "github.com/mitchellh/mapstructure"
 )
 
-// GetMap Returns a mapping of all cryptocurrencies to unique CoinMarketCap ids
-func (c *client) GetMap(ctx context.Context, req *types.GetMapReq) (*types.GetMapResp, error) {
+// GetInfo Returns all static metadata available for one or more cryptocurrencies
+func (c *client) GetInfo(ctx context.Context, req *types.GetInfoReq) (*types.GetInfoResp, error) {
 	if err := req.ValidParams(); err != nil {
 		return nil, err
 	}
@@ -19,12 +19,12 @@ func (c *client) GetMap(ctx context.Context, req *types.GetMapReq) (*types.GetMa
 	values := url.Values{}
 	encoder.Encode(req, values)
 
-	resp, err := c.request(ctx).SetQueryParamsFromValues(values).Get(c.getApi(getMapUri))
+	resp, err := c.request(ctx).SetQueryParamsFromValues(values).Get(c.getApi(getInfoUri))
 	if err != nil {
 		return nil, err
 	}
 
-	result := &types.GetMapResp{}
+	result := &types.GetInfoResp{}
 	if err = tools.JSON.Unmarshal(c.unmarshalResult(resp).Data, &result); err != nil {
 		return nil, err
 	}

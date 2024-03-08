@@ -1,8 +1,9 @@
 package types
 
 import (
-	jsoniter "github.com/json-iterator/go"
 	"time"
+
+	jsoniter "github.com/json-iterator/go"
 )
 
 type OpenAPIRsp struct {
@@ -14,4 +15,12 @@ type OpenAPIRsp struct {
 		CreditCount  int       `json:"credit_count"`
 	} `json:"status"`
 	Data jsoniter.RawMessage `json:"data"`
+}
+
+type Platform struct {
+	Id           int    `json:"id"`
+	Name         string `json:"name"`
+	Symbol       string `json:"symbol"`
+	Slug         string `json:"slug"`
+	TokenAddress string `json:"token_address"`
 }

@@ -34,6 +34,13 @@ func WithTimeout(duration time.Duration) OptionHandler {
 	}
 }
 
+func WithProxyUrl(proxyUrl string) OptionHandler {
+	return func(config *Config) error {
+		config.ProxyUrl = proxyUrl
+		return nil
+	}
+}
+
 // WithSandBox Toggle sandbox mode
 func WithSandBox(flag bool) OptionHandler {
 	return func(config *Config) error {

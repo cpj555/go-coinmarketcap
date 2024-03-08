@@ -2,14 +2,15 @@ package client
 
 import (
 	"context"
+	"net"
+	"net/http"
+	"time"
+
 	"github.com/cpj555/go-coinmarketcap/errs"
 	"github.com/cpj555/go-coinmarketcap/network"
 	"github.com/cpj555/go-coinmarketcap/tools"
 	"github.com/cpj555/go-coinmarketcap/types"
 	"github.com/go-resty/resty/v2"
-	"net"
-	"net/http"
-	"time"
 )
 
 // setupResty setup resty client
@@ -31,6 +32,10 @@ func (c *client) setupResty() {
 				return nil
 			},
 		)
+	if c.conf.ProxyUrl != "" {
+		c.r.SetProxy(c.conf.ProxyUrl)
+	}
+
 	c.r.JSONMarshal = tools.JSON.Marshal
 	c.r.JSONUnmarshal = tools.JSON.Unmarshal
 }
@@ -39,9 +44,6 @@ func (c *client) setupResty() {
 func (c *client) request(ctx context.Context) *resty.Request {
 	return c.r.R().
 		SetContext(ctx).
-		// DoDo OpenAPI only support `application/json` currently
-		SetHeader("Content-Type", "application/json").
-		// DoDo OpenAPI wrapped response into model.OpenAPIRsp
 		SetResult(types.OpenAPIRsp{})
 }
 

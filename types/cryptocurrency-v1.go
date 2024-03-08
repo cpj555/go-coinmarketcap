@@ -21,33 +21,25 @@ const (
 
 // GetMapResp CoinMarketCap ID Map
 // [https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyMap]
-type GetMapResp struct {
-	Data []struct {
-		Id                  int       `json:"id"`
-		Rank                int       `json:"rank"`
-		Name                string    `json:"name"`
-		Symbol              string    `json:"symbol"`
-		Slug                string    `json:"slug"`
-		IsActive            int       `json:"is_active"`
-		FirstHistoricalData time.Time `json:"first_historical_data"`
-		LastHistoricalData  time.Time `json:"last_historical_data"`
-		Platform            struct {
-			Id           int    `json:"id"`
-			Name         string `json:"name"`
-			Symbol       string `json:"symbol"`
-			Slug         string `json:"slug"`
-			TokenAddress string `json:"token_address"`
-		} `json:"platform"`
-	} `json:"data"`
+type GetMapResp []struct {
+	Id                  int       `json:"id"`
+	Rank                int       `json:"rank"`
+	Name                string    `json:"name"`
+	Symbol              string    `json:"symbol"`
+	Slug                string    `json:"slug"`
+	IsActive            int       `json:"is_active"`
+	FirstHistoricalData time.Time `json:"first_historical_data"`
+	LastHistoricalData  time.Time `json:"last_historical_data"`
+	Platform            *Platform `json:"platform"`
 }
 
 type (
 	GetMapReq struct {
-		Start  int
-		Limit  int
-		Sort   Sort
-		Symbol string
-		aux    string
+		Start  int    `schema:"start"`
+		Limit  int    `schema:"limit"`
+		Sort   Sort   `schema:"sort,omitempty"`
+		Symbol string `schema:"symbol,omitempty"`
+		Aux    string `schema:"aux,omitempty"`
 	}
 )
 

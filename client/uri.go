@@ -7,7 +7,8 @@ type uri string
 const (
 
 	// cryptocurrency API
-	getMapUri uri = "/v1/cryptocurrency/map"
+	getMapUri  uri = "/v1/cryptocurrency/map"
+	getInfoUri uri = "/v2/cryptocurrency/info"
 )
 
 // getApi build the full api url
