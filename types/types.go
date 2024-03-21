@@ -6,6 +6,16 @@ import (
 	jsoniter "github.com/json-iterator/go"
 )
 
+// default active
+const (
+	active    ListingStatus = "active"
+	inactive  ListingStatus = "inactive"
+	untracked ListingStatus = "untracked"
+
+	id      Sort = "id"
+	cmcRank Sort = "cmc_rank"
+)
+
 type OpenAPIRsp struct {
 	Status struct {
 		Timestamp    time.Time `json:"timestamp"`

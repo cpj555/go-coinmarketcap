@@ -9,19 +9,18 @@ type ListingStatus string
 
 type Sort string
 
-// default active
-const (
-	active    ListingStatus = "active"
-	inactive  ListingStatus = "inactive"
-	untracked ListingStatus = "untracked"
-
-	id      Sort = "id"
-	cmcRank Sort = "cmc_rank"
-)
-
 // GetMapResp CoinMarketCap ID Map
 // [https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyMap]
-type GetMapResp []struct {
+type GetCryptocurrencyMapReq struct {
+	ListingStatus ListingStatus `schema:"listing_status,default:active"`
+	Start         int           `schema:"start"`
+	Limit         int           `schema:"limit"`
+	Sort          Sort          `schema:"sort,omitempty"`
+	Symbol        string        `schema:"symbol,omitempty"`
+	Aux           string        `schema:"aux,omitempty"`
+}
+
+type GetCryptocurrencyMapResp []struct {
 	Id                  int       `json:"id"`
 	Rank                int       `json:"rank"`
 	Name                string    `json:"name"`
@@ -33,17 +32,7 @@ type GetMapResp []struct {
 	Platform            *Platform `json:"platform"`
 }
 
-type (
-	GetMapReq struct {
-		Start  int    `schema:"start"`
-		Limit  int    `schema:"limit"`
-		Sort   Sort   `schema:"sort,omitempty"`
-		Symbol string `schema:"symbol,omitempty"`
-		Aux    string `schema:"aux,omitempty"`
-	}
-)
-
-func (p *GetMapReq) ValidParams() error {
+func (p *GetCryptocurrencyMapReq) ValidParams() error {
 	if p.Start <= 0 {
 		return errors.New("invalid parameter Start (Start >= 1)")
 	}

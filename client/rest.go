@@ -14,7 +14,7 @@ import (
 )
 
 // setupResty setup resty client
-func (c *client) setupResty() {
+func (c *Client) setupResty() {
 	c.r = resty.New().
 		SetTransport(createTransport(nil, 500)).
 		SetDebug(c.conf.IsDebug).
@@ -41,14 +41,14 @@ func (c *client) setupResty() {
 }
 
 // request you should create a request object before doing each HTTP request
-func (c *client) request(ctx context.Context) *resty.Request {
+func (c *Client) request(ctx context.Context) *resty.Request {
 	return c.r.R().
 		SetContext(ctx).
 		SetResult(types.OpenAPIRsp{})
 }
 
 // unmarshalResult get model.OpenAPIRsp result from the response
-func (c *client) unmarshalResult(resp *resty.Response) *types.OpenAPIRsp {
+func (c *Client) unmarshalResult(resp *resty.Response) *types.OpenAPIRsp {
 	return resp.Result().(*types.OpenAPIRsp)
 }
 

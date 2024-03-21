@@ -10,7 +10,7 @@ import (
 
 func main() {
 
-	c, err := client.New(client.WithSandBox(true), client.WithTimeout(10*time.Second), client.WithProxyUrl("http://localhost:1080"))
+	c, err := client.New(client.WithSandBox(true), client.WithTimeout(10*time.Second), client.WithProxyUrl("http://localhost:1087"))
 	if err != nil {
 		fmt.Printf("创建实例失败：%v\n", err)
 		return
@@ -23,7 +23,7 @@ func main() {
 	//}
 	//fmt.Printf("%+v\n", getMap)
 
-	getInfo, err := c.GetInfo(context.Background(), &types.GetInfoReq{Id: "1"})
+	getInfo, err := c.CryptocurrencyV1.GetMap(context.Background(), &types.GetExchangeMapReq{Start: 1, Limit: 10})
 	if err != nil {
 		fmt.Printf("getMap err：%v\n", err)
 		return

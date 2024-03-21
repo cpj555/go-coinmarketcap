@@ -43,5 +43,17 @@ client.WithProxyUrl("http://localhost:1080") //本地调试得开代理设置下
 	)
 
 // 获取map列表，可以使用下面的方法
-list, err := client.GetMap(context.Background(),&types.GetMapReq{Start: 1, Limit: 10})
+list, err := client.CryptocurrencyV1.GetMap(context.Background(),&types.GetCryptocurrencyV1MapReq{Start: 1, Limit: 10})
 ```
+
+### API documentation
+https://coinmarketcap.com/api/documentation
+
+- [examples](examples/demo-setup)
+
+
+
+* **/v1/cryptocurrency/map** (Get the current price of any cryptocurrencies in any other supported currencies that you need)
+  ```go
+  client.CryptocurrencyV1.GetMap(context.Background(),&types.GetCryptocurrencyMapReq{Start: 1, Limit: 10})
+  ```
