@@ -6,7 +6,7 @@ import (
 )
 
 type GetExchangeMapReq struct {
-	ListingStatus ListingStatus `schema:"listing_status,default:active"`
+	ListingStatus ListingStatus `schema:"listing_status,omitempty,default:active"`
 	Start         int           `schema:"start,default:1"`
 	Limit         int           `schema:"limit"`
 	Sort          Sort          `schema:"sort,omitempty"`

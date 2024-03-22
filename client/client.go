@@ -47,12 +47,13 @@ type (
 
 	// Config coinmarketcap client configuration
 	Config struct {
-		BaseApi   string // coinmarketcap OpenAPI Server Domain
-		ApiKey    string // coinmarketcap ApiKey
-		IsDebug   bool   // debug mode
-		IsSandBox bool
-		Timeout   time.Duration // resty client request timeout
-		ProxyUrl  string        // 国内访问不了设置下代理
+		BaseApi     string // coinmarketcap OpenAPI Server Domain
+		RestyClient *resty.Client
+		ApiKey      string // coinmarketcap ApiKey
+		IsDebug     bool   // debug mode
+		IsSandBox   bool
+		Timeout     time.Duration // resty client request timeout
+		ProxyUrl    string        // 国内访问不了设置下代理
 	}
 )
 
@@ -75,6 +76,9 @@ func New(options ...OptionHandler) (*Client, error) {
 	}
 
 	instance := &Client{conf: config}
+	if config.RestyClient != nil {
+		instance.r = config.RestyClient
+	}
 	instance.setupResty()
 
 	initAPI(instance)

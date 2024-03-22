@@ -15,7 +15,11 @@ import (
 
 // setupResty setup resty client
 func (c *Client) setupResty() {
-	c.r = resty.New().
+	if c.r == nil {
+		c.r = resty.New()
+	}
+
+	c.r.
 		SetTransport(createTransport(nil, 500)).
 		SetDebug(c.conf.IsDebug).
 		SetTimeout(c.conf.Timeout).

@@ -23,11 +23,15 @@ func main() {
 	//}
 	//fmt.Printf("%+v\n", getMap)
 
-	getInfo, err := c.CryptocurrencyV1.GetMap(context.Background(), &types.GetExchangeMapReq{Start: 1, Limit: 10})
-	if err != nil {
-		fmt.Printf("getMap err：%v\n", err)
-		return
-	}
-	fmt.Printf("%+v\n", getInfo)
+	m, err := c.ExchangeV1.GetMap(context.Background(), &types.GetExchangeMapReq{Start: 1, Limit: 10})
+	fmt.Println(err)
+	fmt.Println(m)
+
+	//getInfo, err := c.CryptocurrencyV1.GetMap(context.Background(), &types.GetCryptocurrencyMapReq{Start: 1, Limit: 10})
+	//if err != nil {
+	//	fmt.Printf("getMap err：%v\n", err)
+	//	return
+	//}
+	//fmt.Printf("%+v\n", getInfo)
 
 }

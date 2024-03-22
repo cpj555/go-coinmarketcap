@@ -3,9 +3,18 @@ package client
 import (
 	"errors"
 	"time"
+
+	"github.com/go-resty/resty/v2"
 )
 
 type OptionHandler func(*Config) error
+
+func WithRestyClient(client *resty.Client) OptionHandler {
+	return func(config *Config) error {
+		config.RestyClient = client
+		return nil
+	}
+}
 
 // WithApiKey Customize DoDoBot Api base host
 func WithApiKey(apiKey string) OptionHandler {

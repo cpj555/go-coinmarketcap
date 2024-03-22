@@ -2,7 +2,6 @@ package client
 
 import (
 	"context"
-	"fmt"
 	"github.com/cpj555/go-coinmarketcap/tools"
 	"github.com/cpj555/go-coinmarketcap/types"
 )
@@ -26,7 +25,6 @@ func (e exchangeV1) GetMap(ctx context.Context, req *types.GetExchangeMapReq) (*
 	if err != nil {
 		return nil, err
 	}
-	fmt.Println(resp.String())
 
 	result := &types.GetExchangeMapResp{}
 	if err = tools.JSON.Unmarshal(e.cli.unmarshalResult(resp).Data, &result); err != nil {
