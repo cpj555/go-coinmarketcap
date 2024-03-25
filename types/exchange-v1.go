@@ -41,16 +41,19 @@ type GetExchangeInfoReq struct {
 }
 
 type GetExchangeInfoResp map[string]struct {
-	Id                    int       `json:"id"`
-	Name                  string    `json:"name"`
-	Slug                  string    `json:"slug"`
-	Logo                  string    `json:"logo"`
-	Description           string    `json:"description"`
-	DateLaunched          time.Time `json:"date_launched"`
-	Notice                *string   `json:"notice"`
-	Countries             *[]string `json:"countries"`
-	Fiats                 []string  `json:"fiats"`
-	Tags                  *[]string `json:"tags"`
+	Id           int       `json:"id"`
+	Name         string    `json:"name"`
+	Slug         string    `json:"slug"`
+	Logo         string    `json:"logo"`
+	Description  string    `json:"description"`
+	DateLaunched time.Time `json:"date_launched"`
+	Notice       *string   `json:"notice"`
+	Countries    *[]string `json:"countries"`
+	Fiats        []string  `json:"fiats"`
+	Tags         *[]struct {
+		Name string `json:"name"`
+		Slug string `json:"slug"`
+	} `json:"tags"`
 	Type                  string    `json:"type"`
 	MakerFee              float64   `json:"maker_fee"`
 	TakerFee              float64   `json:"taker_fee"`
