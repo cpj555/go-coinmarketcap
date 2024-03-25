@@ -39,7 +39,21 @@ func main() {
 }
 
 func getExchangeInfo(c *client.Client) {
-	m, err := c.ExchangeV1.GetInfo(context.Background(), &types.GetExchangeInfoReq{Slug: "binance"})
+	m, err := c.ExchangeV1.GetInfo(context.Background(), &types.GetExchangeInfoReq{Slug: "thruster-v2-0-3-fee"})
+	fmt.Println(err)
+	fmt.Println(m)
+
+}
+
+func getQuotes(c *client.Client) {
+	m, err := c.ExchangeV1.GetQuotesLatest(context.Background(), &types.GetExchangeQuotesReq{Slug: "poloniex", Convert: "USD,CNY"})
+	fmt.Println(err)
+	fmt.Println(m)
+}
+
+func getCryptMap(c *client.Client) {
+
+	m, err := c.CryptocurrencyV1.GetMap(context.Background(), &types.GetCryptocurrencyMapReq{Start: 1, Limit: 1})
 	fmt.Println(err)
 	fmt.Println(m)
 }

@@ -12,7 +12,7 @@ type Sort string
 // GetMapResp CoinMarketCap ID Map
 // [https://coinmarketcap.com/api/documentation/v1/#operation/getV1CryptocurrencyMap]
 type GetCryptocurrencyMapReq struct {
-	ListingStatus ListingStatus `schema:"listing_status,default:active"`
+	ListingStatus ListingStatus `schema:"listing_status,omitempty,default:active"`
 	Start         int           `schema:"start"`
 	Limit         int           `schema:"limit"`
 	Sort          Sort          `schema:"sort,omitempty"`
