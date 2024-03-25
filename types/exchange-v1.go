@@ -85,7 +85,7 @@ type GetExchangeQuotesResp map[string]struct {
 	NumCoins       int       `json:"num_coins"`
 	NumMarketPairs int       `json:"num_market_pairs"`
 	LastUpdated    time.Time `json:"last_updated"`
-	TrafficScore   int       `json:"traffic_score"`
+	TrafficScore   float64   `json:"traffic_score"`
 	Rank           int       `json:"rank"`
 	ExchangeScore  float64   `json:"exchange_score"`
 	LiquidityScore float64   `json:"liquidity_score"`
