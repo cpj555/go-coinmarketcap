@@ -7,8 +7,8 @@ import (
 
 type GetExchangeMapReq struct {
 	ListingStatus ListingStatus `schema:"listing_status,omitempty,default:active"`
-	Start         int           `schema:"start,default:1"`
-	Limit         int           `schema:"limit"`
+	Start         int           `schema:"start,omitempty,default:1"`
+	Limit         int           `schema:"limit,omitempty"`
 	Sort          Sort          `schema:"sort,omitempty"`
 	Symbol        string        `schema:"symbol,omitempty"`
 	Aux           string        `schema:"aux,omitempty"`

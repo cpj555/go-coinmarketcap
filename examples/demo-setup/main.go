@@ -3,6 +3,7 @@ package main
 import (
 	"context"
 	"fmt"
+	go_coinmarketcap "github.com/cpj555/go-coinmarketcap"
 	"github.com/cpj555/go-coinmarketcap/client"
 	"github.com/cpj555/go-coinmarketcap/types"
 	"time"
