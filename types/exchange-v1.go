@@ -35,8 +35,8 @@ type GetExchangeMapResp []struct {
 }
 
 type GetExchangeInfoReq struct {
-	Id   int    `json:"id,omitempty"`
-	Slug string `json:"slug,omitempty"`
+	Id   string `schema:"id,omitempty"`
+	Slug string `schema:"slug,omitempty"`
 	Aux  string `schema:"aux,omitempty"`
 }
 

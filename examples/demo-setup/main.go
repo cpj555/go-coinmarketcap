@@ -23,10 +23,11 @@ func main() {
 	//}
 	//fmt.Printf("%+v\n", getMap)
 
-	m, err := c.ExchangeV1.GetMap(context.Background(), &types.GetExchangeMapReq{Start: 1, Limit: 10})
-	fmt.Println(err)
-	fmt.Println(m)
+	//m, err := c.ExchangeV1.GetMap(context.Background(), &types.GetExchangeMapReq{Start: 1, Limit: 10})
+	//fmt.Println(err)
+	//fmt.Println(m)
 
+	getExchangeInfo(c)
 	//getInfo, err := c.CryptocurrencyV1.GetMap(context.Background(), &types.GetCryptocurrencyMapReq{Start: 1, Limit: 10})
 	//if err != nil {
 	//	fmt.Printf("getMap err：%v\n", err)
@@ -34,4 +35,10 @@ func main() {
 	//}
 	//fmt.Printf("%+v\n", getInfo)
 
+}
+
+func getExchangeInfo(c *client.Client) {
+	m, err := c.ExchangeV1.GetInfo(context.Background(), &types.GetExchangeInfoReq{Slug: "binance"})
+	fmt.Println(err)
+	fmt.Println(m)
 }
