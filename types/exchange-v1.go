@@ -41,18 +41,19 @@ type GetExchangeInfoReq struct {
 }
 
 type GetExchangeInfoResp map[string]struct {
-	Id           int       `json:"id"`
-	Name         string    `json:"name"`
-	Slug         string    `json:"slug"`
-	Logo         string    `json:"logo"`
-	Description  string    `json:"description"`
-	DateLaunched time.Time `json:"date_launched"`
-	Notice       *string   `json:"notice"`
-	Countries    *[]string `json:"countries"`
-	Fiats        []string  `json:"fiats"`
+	Id           int        `json:"id"`
+	Name         string     `json:"name"`
+	Slug         string     `json:"slug"`
+	Logo         string     `json:"logo"`
+	Description  string     `json:"description"`
+	DateLaunched *time.Time `json:"date_launched"`
+	Notice       *string    `json:"notice"`
+	Countries    *[]string  `json:"countries"`
+	Fiats        []string   `json:"fiats"`
 	Tags         *[]struct {
-		Name string `json:"name"`
-		Slug string `json:"slug"`
+		Name  string `json:"name"`
+		Slug  string `json:"slug"`
+		Group string `json:"group"`
 	} `json:"tags"`
 	Type                  string    `json:"type"`
 	MakerFee              float64   `json:"maker_fee"`
@@ -91,8 +92,8 @@ type GetExchangeQuotesResp map[string]struct {
 	Quote          map[string]struct {
 		Volume24H              float64 `json:"volume_24h"`
 		Volume24HAdjusted      float64 `json:"volume_24h_adjusted"`
-		Volume7D               int64   `json:"volume_7d"`
-		Volume30D              int64   `json:"volume_30d"`
+		Volume7D               float64 `json:"volume_7d"`
+		Volume30D              float64 `json:"volume_30d"`
 		PercentChangeVolume24H float64 `json:"percent_change_volume_24h"`
 		PercentChangeVolume7D  float64 `json:"percent_change_volume_7d"`
 		PercentChangeVolume30D float64 `json:"percent_change_volume_30d"`
