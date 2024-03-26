@@ -51,7 +51,7 @@ https://coinmarketcap.com/api/documentation
 
 - [examples](examples/demo-setup)
 
-
+- 调试了下 币种相关的接口入参为slug时,返回的map还是id为键
 
 * **/v1/cryptocurrency/map** (Get the current price of any cryptocurrencies in any other supported currencies that you need)
   ```go

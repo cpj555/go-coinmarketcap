@@ -62,20 +62,24 @@ type GetCryptocurrencyQuotesReq struct {
 type GetCryptocurrencyQuoteResp map[string]QuoteItem
 
 type QuoteItem struct {
-	Id                            int       `json:"id"`
-	Name                          string    `json:"name"`
-	Symbol                        string    `json:"symbol"`
-	Slug                          string    `json:"slug"`
-	IsActive                      int       `json:"is_active"`
-	IsFiat                        int       `json:"is_fiat"`
-	CirculatingSupply             int       `json:"circulating_supply"`
-	TotalSupply                   int       `json:"total_supply"`
-	MaxSupply                     int       `json:"max_supply"`
-	DateAdded                     time.Time `json:"date_added"`
-	NumMarketPairs                int       `json:"num_market_pairs"`
-	CmcRank                       int       `json:"cmc_rank"`
-	LastUpdated                   time.Time `json:"last_updated"`
-	Tags                          []string  `json:"tags"`
+	Id                int       `json:"id"`
+	Name              string    `json:"name"`
+	Symbol            string    `json:"symbol"`
+	Slug              string    `json:"slug"`
+	IsActive          int       `json:"is_active"`
+	IsFiat            int       `json:"is_fiat"`
+	CirculatingSupply float64   `json:"circulating_supply"`
+	TotalSupply       float64   `json:"total_supply"`
+	MaxSupply         int       `json:"max_supply"`
+	DateAdded         time.Time `json:"date_added"`
+	NumMarketPairs    int       `json:"num_market_pairs"`
+	CmcRank           int       `json:"cmc_rank"`
+	LastUpdated       time.Time `json:"last_updated"`
+	Tags              *[]struct {
+		Name     string `json:"name"`
+		Slug     string `json:"slug"`
+		Category string `json:"category"`
+	} `json:"tags"`
 	Platform                      *Platform `json:"platform"`
 	SelfReportedCirculatingSupply *int      `json:"self_reported_circulating_supply"`
 	SelfReportedMarketCap         *int      `json:"self_reported_market_cap"`
@@ -88,7 +92,7 @@ type QuoteItem struct {
 		PercentChange7D       float64   `json:"percent_change_7d"`
 		PercentChange30D      float64   `json:"percent_change_30d"`
 		MarketCap             float64   `json:"market_cap"`
-		MarketCapDominance    int       `json:"market_cap_dominance"`
+		MarketCapDominance    float64   `json:"market_cap_dominance"`
 		FullyDilutedMarketCap float64   `json:"fully_diluted_market_cap"`
 		LastUpdated           time.Time `json:"last_updated"`
 	} `json:"quote"`
@@ -106,7 +110,9 @@ type GetCryptocurrencyPricePerformanceStatsReq struct {
 	SkipInvalid bool   `schema:"skip_invalid,omitempty,default:true"`
 }
 
-type GetCryptocurrencyPricePerformanceStatsResp struct {
+type GetCryptocurrencyPricePerformanceStatsResp map[string]CryptocurrencyPricePerformanceStatsItem
+
+type CryptocurrencyPricePerformanceStatsItem struct {
 	Id          int       `json:"id"`
 	Name        string    `json:"name"`
 	Symbol      string    `json:"symbol"`

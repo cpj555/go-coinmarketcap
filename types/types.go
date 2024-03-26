@@ -28,7 +28,7 @@ type OpenAPIRsp struct {
 }
 
 type Platform struct {
-	Id           int    `json:"id"`
+	Id           string `json:"id"`
 	Name         string `json:"name"`
 	Symbol       string `json:"symbol"`
 	Slug         string `json:"slug"`

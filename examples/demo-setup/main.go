@@ -46,7 +46,7 @@ func getExchangeInfo(c *client.Client) {
 }
 
 func getQuotes(c *client.Client) {
-	m, err := c.ExchangeV1.GetQuotesLatest(context.Background(), &types.GetExchangeQuotesReq{Slug: "poloniex", Convert: "USD,CNY"})
+	m, err := c.ExchangeV1.GetQuotesLatest(context.Background(), &types.GetExchangeQuotesReq{Slug: "binance", Convert: "CNY"})
 	fmt.Println(err)
 	fmt.Println(m)
 }
@@ -54,6 +54,24 @@ func getQuotes(c *client.Client) {
 func getCryptMap(c *client.Client) {
 
 	m, err := c.CryptocurrencyV1.GetMap(context.Background(), &types.GetCryptocurrencyMapReq{Start: 1, Limit: 1})
+	fmt.Println(err)
+	fmt.Println(m)
+}
+
+func getCryptInfo(c *client.Client) {
+	m, err := c.CryptocurrencyV2.GetInfo(context.Background(), &types.GetCryptocurrencyInfoReq{Slug: "bitcoin,ethereum"})
+	fmt.Println(err)
+	fmt.Println(m)
+}
+
+func getCryptQuotes(c *client.Client) {
+	m, err := c.CryptocurrencyV2.GetQuotesLatest(context.Background(), &types.GetCryptocurrencyQuotesReq{Slug: "bitcoin,ethereum"})
+	fmt.Println(err)
+	fmt.Println(m)
+}
+
+func getPricePerformance(c *client.Client) {
+	m, err := c.CryptocurrencyV2.GetPricePerformanceStatsLatest(context.Background(), &types.GetCryptocurrencyPricePerformanceStatsReq{Id: "1,1027"})
 	fmt.Println(err)
 	fmt.Println(m)
 }
