@@ -40,7 +40,9 @@ type GetExchangeInfoReq struct {
 	Aux  string `schema:"aux,omitempty"`
 }
 
-type GetExchangeInfoResp map[string]struct {
+type GetExchangeInfoResp map[string]ExchangeInfoItem
+
+type ExchangeInfoItem struct {
 	Id           int        `json:"id"`
 	Name         string     `json:"name"`
 	Slug         string     `json:"slug"`
@@ -78,7 +80,9 @@ type GetExchangeQuotesReq struct {
 	Aux       string `schema:"aux,omitempty"`
 }
 
-type GetExchangeQuotesResp map[string]struct {
+type GetExchangeQuotesResp map[string]ExchangeQuotesItem
+
+type ExchangeQuotesItem struct {
 	Id             int       `json:"id"`
 	Name           string    `json:"name"`
 	Slug           string    `json:"slug"`

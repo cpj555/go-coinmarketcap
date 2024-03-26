@@ -15,7 +15,9 @@ type GetCryptocurrencyInfoReq struct {
 }
 
 // GetInfoResp CoinMarketCap ID Map
-type GetCryptocurrencyInfoResp map[string]struct {
+type GetCryptocurrencyInfoResp map[string]InfoItem
+
+type InfoItem struct {
 	Urls struct {
 		Website      []string `json:"website"`
 		TechnicalDoc []string `json:"technical_doc"`
@@ -57,7 +59,9 @@ type GetCryptocurrencyQuotesReq struct {
 	SkipInvalid bool   `schema:"skip_invalid,omitempty,default:true"`
 }
 
-type GetCryptocurrencyQuoteResp map[string]struct {
+type GetCryptocurrencyQuoteResp map[string]QuoteItem
+
+type QuoteItem struct {
 	Id                            int       `json:"id"`
 	Name                          string    `json:"name"`
 	Symbol                        string    `json:"symbol"`
