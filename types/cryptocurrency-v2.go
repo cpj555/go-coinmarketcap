@@ -41,8 +41,8 @@ type InfoItem struct {
 	Tags                          []string  `json:"tags"`
 	Platform                      *Platform `json:"platform"`
 	Category                      string    `json:"category"`
-	SelfReportedCirculatingSupply *int      `json:"self_reported_circulating_supply"`
-	SelfReportedMarketCap         *int      `json:"self_reported_market_cap"`
+	SelfReportedCirculatingSupply *float64  `json:"self_reported_circulating_supply"`
+	SelfReportedMarketCap         *float64  `json:"self_reported_market_cap"`
 	SelfReportedTags              *[]string `json:"self_reported_tags"`
 	InfiniteSupply                bool      `json:"infinite_supply"`
 }
@@ -70,7 +70,7 @@ type QuoteItem struct {
 	IsFiat            int       `json:"is_fiat"`
 	CirculatingSupply float64   `json:"circulating_supply"`
 	TotalSupply       float64   `json:"total_supply"`
-	MaxSupply         int       `json:"max_supply"`
+	MaxSupply         float64   `json:"max_supply"`
 	DateAdded         time.Time `json:"date_added"`
 	NumMarketPairs    int       `json:"num_market_pairs"`
 	CmcRank           int       `json:"cmc_rank"`
@@ -80,9 +80,15 @@ type QuoteItem struct {
 		Slug     string `json:"slug"`
 		Category string `json:"category"`
 	} `json:"tags"`
-	Platform                      *Platform `json:"platform"`
-	SelfReportedCirculatingSupply *int      `json:"self_reported_circulating_supply"`
-	SelfReportedMarketCap         *int      `json:"self_reported_market_cap"`
+	Platform *struct {
+		Id           int    `json:"id"`
+		Name         string `json:"name"`
+		Symbol       string `json:"symbol"`
+		Slug         string `json:"slug"`
+		TokenAddress string `json:"token_address"`
+	} `json:"platform"`
+	SelfReportedCirculatingSupply *float64 `json:"self_reported_circulating_supply"`
+	SelfReportedMarketCap         *float64 `json:"self_reported_market_cap"`
 	Quote                         map[string]struct {
 		Price                 float64   `json:"price"`
 		Volume24H             float64   `json:"volume_24h"`
