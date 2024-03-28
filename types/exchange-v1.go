@@ -104,3 +104,52 @@ type ExchangeQuotesItem struct {
 		EffectiveLiquidity24H  float64 `json:"effective_liquidity_24h"`
 	} `json:"quote"`
 }
+
+type GetExchangeMarketPairReq struct {
+	Id            string `schema:"id,omitempty"`
+	Slug          string `schema:"slug,omitempty"`
+	Start         int    `schema:"start,omitempty,default:1"`
+	Limit         int    `schema:"limit,omitempty"`
+	Aux           string `schema:"aux,omitempty"`
+	MatchedId     string `schema:"matched_id,omitempty"`
+	MatchedSymbol string `schema:"matched_symbol,omitempty"`
+	Category      string `schema:"category,omitempty"`
+	FeeType       string `schema:"fee_type,omitempty"`
+	Convert       string `schema:"convert,omitempty"`
+	ConvertId     string `schema:"convert_id,omitempty"`
+}
+
+type GetExchangeMarketPairResp struct {
+	Id             int     `json:"id"`
+	Name           string  `json:"name"`
+	Slug           string  `json:"slug"`
+	NumMarketPairs int     `json:"num_market_pairs"`
+	Volume24H      float64 `json:"volume_24h"`
+	MarketPairs    []struct {
+		MarketId        int         `json:"market_id"`
+		MarketPair      string      `json:"market_pair"`
+		Category        string      `json:"category"`
+		FeeType         string      `json:"fee_type"`
+		OutlierDetected int         `json:"outlier_detected"`
+		Exclusions      interface{} `json:"exclusions"`
+		MarketPairBase  struct {
+			CurrencyId     int    `json:"currency_id"`
+			CurrencySymbol string `json:"currency_symbol"`
+			ExchangeSymbol string `json:"exchange_symbol"`
+			CurrencyType   string `json:"currency_type"`
+		} `json:"market_pair_base"`
+		MarketPairQuote struct {
+			CurrencyId     int    `json:"currency_id"`
+			CurrencySymbol string `json:"currency_symbol"`
+			ExchangeSymbol string `json:"exchange_symbol"`
+			CurrencyType   string `json:"currency_type"`
+		} `json:"market_pair_quote"`
+		Quote map[string]struct {
+			Price            float64   `json:"price"`
+			Volume24HBase    float64   `json:"volume_24h_base"`
+			Volume24HQuote   float64   `json:"volume_24h_quote"`
+			VolumePercentage float64   `json:"volume_percentage"`
+			LastUpdated      time.Time `json:"last_updated"`
+		} `json:"quote"`
+	} `json:"market_pairs"`
+}

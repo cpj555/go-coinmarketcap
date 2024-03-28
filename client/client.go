@@ -26,6 +26,7 @@ type (
 		GetInfo(ctx context.Context, req *types.GetCryptocurrencyInfoReq) (*types.GetCryptocurrencyInfoResp, error)
 		GetQuotesLatest(ctx context.Context, req *types.GetCryptocurrencyQuotesReq) (*types.GetCryptocurrencyQuoteResp, error)
 		GetPricePerformanceStatsLatest(ctx context.Context, req *types.GetCryptocurrencyPricePerformanceStatsReq) (*types.GetCryptocurrencyPricePerformanceStatsResp, error)
+		GetMarketPairLatest(ctx context.Context, req *types.GetCryptocurrencyMarketPairReq) (*types.GetCryptocurrencyMarketPairResp, error)
 	}
 
 	// 交易所接口
@@ -33,6 +34,7 @@ type (
 		GetMap(ctx context.Context, req *types.GetExchangeMapReq) (*types.GetExchangeMapResp, error)
 		GetInfo(ctx context.Context, req *types.GetExchangeInfoReq) (*types.GetExchangeInfoResp, error)
 		GetQuotesLatest(ctx context.Context, req *types.GetExchangeQuotesReq) (*types.GetExchangeQuotesResp, error)
+		GetMarketPairLatest(ctx context.Context, req *types.GetExchangeMarketPairReq) (*types.GetExchangeMarketPairResp, error)
 	}
 )
 

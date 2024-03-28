@@ -61,3 +61,18 @@ func (c *cryptocurrencyV2) GetPricePerformanceStatsLatest(ctx context.Context, r
 	}
 	return result, nil
 }
+
+func (c *cryptocurrencyV2) GetMarketPairLatest(ctx context.Context, req *types.GetCryptocurrencyMarketPairReq) (*types.GetCryptocurrencyMarketPairResp, error) {
+	values := tools.ToUrlValues(req)
+
+	resp, err := c.cli.request(ctx).SetQueryParamsFromValues(values).Get(c.cli.getApi(getCryptocurrencyMarketPairUri))
+	if err != nil {
+		return nil, err
+	}
+
+	result := &types.GetCryptocurrencyMarketPairResp{}
+	if err = tools.JSON.Unmarshal(c.cli.unmarshalResult(resp).Data, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
