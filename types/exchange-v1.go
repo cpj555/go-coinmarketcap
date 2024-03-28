@@ -146,6 +146,7 @@ type GetExchangeMarketPairResp struct {
 		} `json:"market_pair_quote"`
 		Quote map[string]struct {
 			Price            float64   `json:"price"`
+			Volume24H        float64   `json:"volume_24h"`
 			Volume24HBase    float64   `json:"volume_24h_base"`
 			Volume24HQuote   float64   `json:"volume_24h_quote"`
 			VolumePercentage float64   `json:"volume_percentage"`
