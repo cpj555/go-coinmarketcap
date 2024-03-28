@@ -120,15 +120,15 @@ type GetExchangeMarketPairReq struct {
 }
 
 type GetExchangeMarketPairResp struct {
-	Id             int              `json:"id"`
-	Name           string           `json:"name"`
-	Slug           string           `json:"slug"`
-	NumMarketPairs int              `json:"num_market_pairs"`
-	Volume24H      float64          `json:"volume_24h"`
-	MarketPairs    []MarketPairItem `json:"market_pairs"`
+	Id             int                      `json:"id"`
+	Name           string                   `json:"name"`
+	Slug           string                   `json:"slug"`
+	NumMarketPairs int                      `json:"num_market_pairs"`
+	Volume24H      float64                  `json:"volume_24h"`
+	MarketPairs    []ExchangeMarketPairItem `json:"market_pairs"`
 }
 
-type MarketPairItem struct {
+type ExchangeMarketPairItem struct {
 	MarketId        int         `json:"market_id"`
 	MarketPair      string      `json:"market_pair"`
 	Category        string      `json:"category"`

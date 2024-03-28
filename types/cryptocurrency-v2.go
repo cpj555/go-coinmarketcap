@@ -161,39 +161,41 @@ type GetCryptocurrencyMarketPairReq struct {
 }
 
 type GetCryptocurrencyMarketPairResp struct {
-	Id             int    `json:"id"`
-	Name           string `json:"name"`
-	Symbol         string `json:"symbol"`
-	NumMarketPairs int    `json:"num_market_pairs"`
-	MarketPairs    []struct {
-		Exchange struct {
-			Id   int    `json:"id"`
-			Name string `json:"name"`
-			Slug string `json:"slug"`
-		} `json:"exchange"`
-		MarketId       int    `json:"market_id"`
-		MarketPair     string `json:"market_pair"`
-		Category       string `json:"category"`
-		FeeType        string `json:"fee_type"`
-		MarketPairBase struct {
-			CurrencyId     int    `json:"currency_id"`
-			CurrencySymbol string `json:"currency_symbol"`
-			ExchangeSymbol string `json:"exchange_symbol"`
-			CurrencyType   string `json:"currency_type"`
-		} `json:"market_pair_base"`
-		MarketPairQuote struct {
-			CurrencyId     int    `json:"currency_id"`
-			CurrencySymbol string `json:"currency_symbol"`
-			ExchangeSymbol string `json:"exchange_symbol"`
-			CurrencyType   string `json:"currency_type"`
-		} `json:"market_pair_quote"`
-		Quote map[string]struct {
-			Price          float64   `json:"price"`
-			PriceQuote     float64   `json:"price_quote"`
-			Volume24H      float64   `json:"volume_24h"`
-			Volume24HBase  float64   `json:"volume_24h_base"`
-			Volume24HQuote float64   `json:"volume_24h_quote"`
-			LastUpdated    time.Time `json:"last_updated"`
-		} `json:"quote"`
-	} `json:"market_pairs"`
+	Id             int                            `json:"id"`
+	Name           string                         `json:"name"`
+	Symbol         string                         `json:"symbol"`
+	NumMarketPairs int                            `json:"num_market_pairs"`
+	MarketPairs    []CryptocurrencyMarketPairItem `json:"market_pairs"`
+}
+
+type CryptocurrencyMarketPairItem struct {
+	Exchange struct {
+		Id   int    `json:"id"`
+		Name string `json:"name"`
+		Slug string `json:"slug"`
+	} `json:"exchange"`
+	MarketId       int    `json:"market_id"`
+	MarketPair     string `json:"market_pair"`
+	Category       string `json:"category"`
+	FeeType        string `json:"fee_type"`
+	MarketPairBase struct {
+		CurrencyId     int    `json:"currency_id"`
+		CurrencySymbol string `json:"currency_symbol"`
+		ExchangeSymbol string `json:"exchange_symbol"`
+		CurrencyType   string `json:"currency_type"`
+	} `json:"market_pair_base"`
+	MarketPairQuote struct {
+		CurrencyId     int    `json:"currency_id"`
+		CurrencySymbol string `json:"currency_symbol"`
+		ExchangeSymbol string `json:"exchange_symbol"`
+		CurrencyType   string `json:"currency_type"`
+	} `json:"market_pair_quote"`
+	Quote map[string]struct {
+		Price          float64   `json:"price"`
+		PriceQuote     float64   `json:"price_quote"`
+		Volume24H      float64   `json:"volume_24h"`
+		Volume24HBase  float64   `json:"volume_24h_base"`
+		Volume24HQuote float64   `json:"volume_24h_quote"`
+		LastUpdated    time.Time `json:"last_updated"`
+	} `json:"quote"`
 }
