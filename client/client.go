@@ -36,6 +36,10 @@ type (
 		GetQuotesLatest(ctx context.Context, req *types.GetExchangeQuotesReq) (*types.GetExchangeQuotesResp, error)
 		GetMarketPairLatest(ctx context.Context, req *types.GetExchangeMarketPairReq) (*types.GetExchangeMarketPairResp, error)
 	}
+
+	FiatV1API interface {
+		GetMap(ctx context.Context, req *types.GetFiatMapReq) (*types.GetFiatResp, error)
+	}
 )
 
 type (
@@ -44,6 +48,7 @@ type (
 		CryptocurrencyV1 CryptocurrencyV1API
 		CryptocurrencyV2 CryptocurrencyV2API
 		ExchangeV1       ExchangeV1API
+		FiatV1           FiatV1API
 		r                *resty.Client
 	}
 
@@ -92,6 +97,7 @@ func initAPI(client *Client) {
 	client.CryptocurrencyV1 = newCryptocurrencyV1(client)
 	client.CryptocurrencyV2 = newCryptocurrencyV2(client)
 	client.ExchangeV1 = newExchangeV1(client)
+	client.FiatV1 = newFiatV1(client)
 }
 
 // getDefaultConfig Get the default configuration

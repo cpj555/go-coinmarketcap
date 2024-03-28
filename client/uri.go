@@ -17,6 +17,8 @@ const (
 	getExchangeInfoUri         uri = "/v1/exchange/info"
 	getExchangeQuotesLatestUri uri = "/v1/exchange/quotes/latest"
 	getExchangeMarketPairUri   uri = "/v1/exchange/market-pairs/latest"
+
+	getFiatMapUri uri = "/v1/fiat/map"
 )
 
 // getApi build the full api url
