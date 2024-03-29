@@ -7,6 +7,7 @@ import (
 
 	"github.com/cpj555/go-coinmarketcap/types"
 	"github.com/go-resty/resty/v2"
+	"golang.org/x/time/rate"
 )
 
 type (
@@ -50,17 +51,19 @@ type (
 		ExchangeV1       ExchangeV1API
 		FiatV1           FiatV1API
 		r                *resty.Client
+		limiter          *rate.Limiter
 	}
 
 	// Config coinmarketcap client configuration
 	Config struct {
-		BaseApi     string // coinmarketcap OpenAPI Server Domain
-		RestyClient *resty.Client
-		ApiKey      string // coinmarketcap ApiKey
-		IsDebug     bool   // debug mode
-		IsSandBox   bool
-		Timeout     time.Duration // resty client request timeout
-		ProxyUrl    string        // 国内访问不了设置下代理
+		BaseApi          string // coinmarketcap OpenAPI Server Domain
+		RestyClient      *resty.Client
+		ApiKey           string // coinmarketcap ApiKey
+		IsDebug          bool   // debug mode
+		IsSandBox        bool
+		Timeout          time.Duration // resty client request timeout
+		ProxyUrl         string        // 国内访问不了设置下代理
+		RequestPerMinute int
 	}
 )
 
@@ -89,6 +92,7 @@ func New(options ...OptionHandler) (*Client, error) {
 	instance.setupResty()
 
 	initAPI(instance)
+	initLimiter(instance, config.RequestPerMinute)
 
 	return instance, nil
 }
@@ -100,12 +104,21 @@ func initAPI(client *Client) {
 	client.FiatV1 = newFiatV1(client)
 }
 
+// 初始化限流器 配置api的等级使用
+func initLimiter(client *Client, requestPerMinute int) {
+	if requestPerMinute > 0 {
+		//reqsPerSecond := float64(requestPerMinute) / 60
+		client.limiter = rate.NewLimiter(rate.Every(1*time.Second), 1)
+	}
+}
+
 // getDefaultConfig Get the default configuration
 func getDefaultConfig() *Config {
 	return &Config{
-		BaseApi: "https://pro-api.coinmarketcap.com",
-		IsDebug: false,
-		Timeout: time.Second * 5,
+		BaseApi:          "https://pro-api.coinmarketcap.com",
+		IsDebug:          false,
+		Timeout:          time.Second * 5,
+		RequestPerMinute: 60,
 	}
 }
 

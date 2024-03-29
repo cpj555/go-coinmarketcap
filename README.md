@@ -39,6 +39,7 @@ apiKey := "your-api-key"
 //     client.WithTimeout(time.Second*3)
 //
 client, err := NewClient(client.WithApiKey(apiKey), client.WithTimeout(time.Second*3),
+	client.WithRequestPerMinute(60),//限流器cmc接口配合购买的cmc等级使用,配置自己的业务并发调用
 client.WithProxyUrl("http://localhost:1080") //本地调试得开代理设置下代理请求,生产环境部署到香港或者国外服务器
 	)
 

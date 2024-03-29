@@ -46,6 +46,9 @@ func (c *Client) setupResty() {
 
 // request you should create a request object before doing each HTTP request
 func (c *Client) request(ctx context.Context) *resty.Request {
+	if c.limiter != nil {
+		c.limiter.Wait(ctx)
+	}
 	return c.r.R().
 		SetContext(ctx).
 		SetResult(types.OpenAPIRsp{})
