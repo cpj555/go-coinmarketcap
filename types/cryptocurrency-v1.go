@@ -27,6 +27,7 @@ type GetCryptocurrencyMapResp []struct {
 	Symbol              string    `json:"symbol"`
 	Slug                string    `json:"slug"`
 	IsActive            int       `json:"is_active"`
+	Status              string    `json:"status"`
 	FirstHistoricalData time.Time `json:"first_historical_data"`
 	LastHistoricalData  time.Time `json:"last_historical_data"`
 	Platform            *struct {
