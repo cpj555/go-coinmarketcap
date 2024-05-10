@@ -1,6 +1,7 @@
 package types
 
 import (
+	"encoding/json"
 	"time"
 )
 
@@ -191,11 +192,11 @@ type CryptocurrencyMarketPairItem struct {
 		CurrencyType   string `json:"currency_type"`
 	} `json:"market_pair_quote"`
 	Quote map[string]struct {
-		Price          float64   `json:"price"`
-		PriceQuote     float64   `json:"price_quote"`
-		Volume24H      float64   `json:"volume_24h"`
-		Volume24HBase  float64   `json:"volume_24h_base"`
-		Volume24HQuote float64   `json:"volume_24h_quote"`
-		LastUpdated    time.Time `json:"last_updated"`
+		Price          json.Number `json:"price"`
+		PriceQuote     float64     `json:"price_quote"`
+		Volume24H      float64     `json:"volume_24h"`
+		Volume24HBase  float64     `json:"volume_24h_base"`
+		Volume24HQuote float64     `json:"volume_24h_quote"`
+		LastUpdated    time.Time   `json:"last_updated"`
 	} `json:"quote"`
 }
