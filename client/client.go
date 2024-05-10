@@ -41,6 +41,10 @@ type (
 	FiatV1API interface {
 		GetMap(ctx context.Context, req *types.GetFiatMapReq) (*types.GetFiatResp, error)
 	}
+
+	GlobalMetricsV1API interface {
+		GetQuotesLatest(ctx context.Context, req *types.GetGlobalMetricsQuotesReq) (*types.GetGlobalMetricsQuotesResp, error)
+	}
 )
 
 type (
@@ -50,6 +54,7 @@ type (
 		CryptocurrencyV2 CryptocurrencyV2API
 		ExchangeV1       ExchangeV1API
 		FiatV1           FiatV1API
+		GlobalMetricsV1  GlobalMetricsV1API
 		r                *resty.Client
 		limiter          *rate.Limiter
 	}
@@ -102,13 +107,14 @@ func initAPI(client *Client) {
 	client.CryptocurrencyV2 = newCryptocurrencyV2(client)
 	client.ExchangeV1 = newExchangeV1(client)
 	client.FiatV1 = newFiatV1(client)
+	client.GlobalMetricsV1 = newGlobalMetricsV1(client)
 }
 
 // 初始化限流器 配置api的等级使用
 func initLimiter(client *Client, requestPerMinute int) {
 	if requestPerMinute > 0 {
-		//reqsPerSecond := float64(requestPerMinute) / 60
-		client.limiter = rate.NewLimiter(rate.Every(1*time.Second), 1)
+		reqsPerSecond := float64(requestPerMinute) / 60.0
+		client.limiter = rate.NewLimiter(rate.Limit(reqsPerSecond), requestPerMinute)
 	}
 }
 
