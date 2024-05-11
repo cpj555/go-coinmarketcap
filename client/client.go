@@ -68,7 +68,7 @@ type (
 		IsSandBox        bool
 		Timeout          time.Duration // resty client request timeout
 		ProxyUrl         string        // 国内访问不了设置下代理
-		RequestPerMinute int
+		RequestPerSecond int
 	}
 )
 
@@ -97,7 +97,7 @@ func New(options ...OptionHandler) (*Client, error) {
 	instance.setupResty()
 
 	initAPI(instance)
-	initLimiter(instance, config.RequestPerMinute)
+	initLimiter(instance, config.RequestPerSecond)
 
 	return instance, nil
 }
@@ -111,10 +111,9 @@ func initAPI(client *Client) {
 }
 
 // 初始化限流器 配置api的等级使用
-func initLimiter(client *Client, requestPerMinute int) {
-	if requestPerMinute > 0 {
-		reqsPerSecond := float64(requestPerMinute) / 60.0
-		client.limiter = rate.NewLimiter(rate.Limit(reqsPerSecond), requestPerMinute)
+func initLimiter(client *Client, RequestPerSecond int) {
+	if RequestPerSecond > 0 {
+		client.limiter = rate.NewLimiter(rate.Every(time.Second), RequestPerSecond)
 	}
 }
 
@@ -124,7 +123,7 @@ func getDefaultConfig() *Config {
 		BaseApi:          "https://pro-api.coinmarketcap.com",
 		IsDebug:          false,
 		Timeout:          time.Second * 5,
-		RequestPerMinute: 60,
+		RequestPerSecond: 1,
 	}
 }
 

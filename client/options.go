@@ -67,9 +67,9 @@ func WithDebugMode(flag bool) OptionHandler {
 }
 
 // WithDebugMode Toggle debug mode
-func WithRequestPerMinute(m int) OptionHandler {
+func WithRequestPerSecond(m int) OptionHandler {
 	return func(config *Config) error {
-		config.RequestPerMinute = m
+		config.RequestPerSecond = m
 		return nil
 	}
 }
