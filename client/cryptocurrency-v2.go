@@ -2,6 +2,7 @@ package client
 
 import (
 	"context"
+	"fmt"
 	"github.com/cpj555/go-coinmarketcap/tools"
 	"github.com/cpj555/go-coinmarketcap/types"
 )
@@ -35,7 +36,7 @@ func (c *cryptocurrencyV2) GetQuotesLatest(ctx context.Context, req *types.GetCr
 
 	values := tools.ToUrlValues(req)
 
-	resp, err := c.cli.request(ctx).SetQueryParamsFromValues(values).Get(c.cli.getApi(getCryptocurrencyQuotesLatest))
+	resp, err := c.cli.request(ctx).SetQueryParamsFromValues(values).Get(c.cli.getApi(getCryptocurrencyQuotesLatestUri))
 	if err != nil {
 		return nil, err
 	}
@@ -69,6 +70,7 @@ func (c *cryptocurrencyV2) GetMarketPairLatest(ctx context.Context, req *types.G
 	if err != nil {
 		return nil, err
 	}
+
 
 	result := &types.GetCryptocurrencyMarketPairResp{}
 	if err = tools.JSON.Unmarshal(c.cli.unmarshalResult(resp).Data, &result); err != nil {

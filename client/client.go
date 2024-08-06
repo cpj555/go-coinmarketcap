@@ -30,11 +30,16 @@ type (
 		GetMarketPairLatest(ctx context.Context, req *types.GetCryptocurrencyMarketPairReq) (*types.GetCryptocurrencyMarketPairResp, error)
 	}
 
+	CryptocurrencyV3API interface {
+		GetQuotesHistorical(ctx context.Context, req *types.GetCryptocurrencyQuotesHistoricalReq) (*types.GetCryptocurrencyQuoteHistoricalResp, error)
+	}
+
 	// 交易所接口
 	ExchangeV1API interface {
 		GetMap(ctx context.Context, req *types.GetExchangeMapReq) (*types.GetExchangeMapResp, error)
 		GetInfo(ctx context.Context, req *types.GetExchangeInfoReq) (*types.GetExchangeInfoResp, error)
 		GetQuotesLatest(ctx context.Context, req *types.GetExchangeQuotesReq) (*types.GetExchangeQuotesResp, error)
+		GetQuotesHistorical(ctx context.Context, req *types.GetExchangeQuotesHistoricalReq) (*types.GetExchangeQuotesHistoricalResp, error)
 		GetMarketPairLatest(ctx context.Context, req *types.GetExchangeMarketPairReq) (*types.GetExchangeMarketPairResp, error)
 	}
 
@@ -52,6 +57,7 @@ type (
 		conf             *Config
 		CryptocurrencyV1 CryptocurrencyV1API
 		CryptocurrencyV2 CryptocurrencyV2API
+		CryptocurrencyV3 CryptocurrencyV3API
 		ExchangeV1       ExchangeV1API
 		FiatV1           FiatV1API
 		GlobalMetricsV1  GlobalMetricsV1API
@@ -105,6 +111,7 @@ func New(options ...OptionHandler) (*Client, error) {
 func initAPI(client *Client) {
 	client.CryptocurrencyV1 = newCryptocurrencyV1(client)
 	client.CryptocurrencyV2 = newCryptocurrencyV2(client)
+	client.CryptocurrencyV3 = newCryptocurrencyV3(client)
 	client.ExchangeV1 = newExchangeV1(client)
 	client.FiatV1 = newFiatV1(client)
 	client.GlobalMetricsV1 = newGlobalMetricsV1(client)

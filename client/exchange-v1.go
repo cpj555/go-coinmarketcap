@@ -55,8 +55,23 @@ func (e *exchangeV1) GetQuotesLatest(ctx context.Context, req *types.GetExchange
 	if err != nil {
 		return nil, err
 	}
-	
+
 	result := &types.GetExchangeQuotesResp{}
+	if err = tools.JSON.Unmarshal(e.cli.unmarshalResult(resp).Data, &result); err != nil {
+		return nil, err
+	}
+	return result, nil
+}
+
+func (e *exchangeV1) GetQuotesHistorical(ctx context.Context, req *types.GetExchangeQuotesHistoricalReq) (*types.GetExchangeQuotesHistoricalResp, error) {
+	values := tools.ToUrlValues(req)
+
+	resp, err := e.cli.request(ctx).SetQueryParamsFromValues(values).Get(e.cli.getApi(getExchangeQuotesHistoricalUri))
+	if err != nil {
+		return nil, err
+	}
+
+	result := &types.GetExchangeQuotesHistoricalResp{}
 	if err = tools.JSON.Unmarshal(e.cli.unmarshalResult(resp).Data, &result); err != nil {
 		return nil, err
 	}

@@ -105,6 +105,31 @@ type ExchangeQuotesItem struct {
 	} `json:"quote"`
 }
 
+// [https://coinmarketcap.com/api/documentation/v1/#operation/getV1ExchangeMarketpairsLatest]
+type GetExchangeQuotesHistoricalReq struct {
+	GetExchangeQuotesReq
+	TimeStart string `schema:"time_start,omitempty"`
+	TimeEnd   string `schema:"time_end,omitempty"`
+	Count     int    `schema:"count,omitempty"`
+	Interval  string `schema:"interval,omitempty"`
+}
+
+type GetExchangeQuotesHistoricalResp map[string]GetExchangeQuotesHistoricalItem
+
+type GetExchangeQuotesHistoricalItem struct {
+	Id     int    `json:"id"`
+	Name   string `json:"name"`
+	Slug   string `json:"slug"`
+	Quotes []struct {
+		TimeStamp time.Time `json:"timestamp"`
+		Quote     map[string]struct {
+			Volume24H float64   `json:"volume_24h"`
+			TimeStamp time.Time `json:"timestamp"`
+		} `json:"quote"`
+		NumMarketPairs int `json:"num_market_pairs"`
+	} `json:"quotes"`
+}
+
 type GetExchangeMarketPairReq struct {
 	Id            string `schema:"id,omitempty"`
 	Slug          string `schema:"slug,omitempty"`
