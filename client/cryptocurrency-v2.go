@@ -2,7 +2,6 @@ package client
 
 import (
 	"context"
-	"fmt"
 	"github.com/cpj555/go-coinmarketcap/tools"
 	"github.com/cpj555/go-coinmarketcap/types"
 )
@@ -70,7 +69,6 @@ func (c *cryptocurrencyV2) GetMarketPairLatest(ctx context.Context, req *types.G
 	if err != nil {
 		return nil, err
 	}
-
 
 	result := &types.GetCryptocurrencyMarketPairResp{}
 	if err = tools.JSON.Unmarshal(c.cli.unmarshalResult(resp).Data, &result); err != nil {
