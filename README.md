@@ -8,7 +8,7 @@
 
 
 # go-coinmarketcap
-  <a href="https://github.com/dodo-open/dodo-open-go/blob/main/LICENSE">
+  <a href="https://github.com/cpj555/go-coinmarketcap/blob/main/LICENSE">
     <img src="https://img.shields.io/github/license/cpj555/go-coinmarketcap" alt="license">
   </a>
 
